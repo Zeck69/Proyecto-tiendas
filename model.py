@@ -1,20 +1,8 @@
-from geopy.geocoders import Nominatim
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from flask import Flask, request
 
-#returns zip code from address
-def get_zipcode(address):
-    geolocator = Nominatim(user_agent="my_app")
-    location = geolocator.geocode(address, exactly_one=True)
-
-    if location:
-        return location.address.split(",")[-2]#.raw#['address']#['municipality']
-    else:
-        return None
     
 def info_CP(cp):
     pob = municipios.at[(municipios["Codigo Postal"] == cp).idxmax(),"Poblacion"]
