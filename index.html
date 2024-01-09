@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tienda Espejo CP</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+
+    .form-group input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .form-group button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Tienda Espejo CP</h1>
+    <div class="form-group">
+      <label for="m2">M2 en metros cuadrados de la tienda:</label>
+      <input type="number" id="m2">
+    </div>
+    <div class="form-group">
+      <label for="tarifa">TARIFA:</label>
+      <select id="tarifa">
+        <option value="1">Agresiva</option>
+        <option value="2">Estandar</option>
+        <option value="3">Plus</option>
+        <option value="4">XPlus</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="rol">ROL:</label>
+      <select id="rol">
+        <option value="1">Conveniencia</option>
+        <option value="2">Urbana Comercial</option>
+        <option value="3">Urbana Residencial</option>
+        <option value="4">Rural</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sur">SURTIDO:</label>
+      <select id="sur">
+        <option value="1">Nacional 3</option>
+        <option value="2">Nacional 4</option>
+        <option value="3">Nacional 5</option>
+        <option value="4">Nacional 6</option>
+        <option value="5">Nacional 7</option>
+        <option value="6">Nacional 8</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cp">CP: Codigo Postal</label>
+      <input type="number" id="cp">
+    </div>
+    <div class="form-group">
+      <label for="tiendas">Numero de tiendas a devolver:</label>
+      <input type="number" id="tiendas">
+    </div>
+    <button onclick="calculateTiendas()">Find Tiendas</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateTiendas() {
+      var m2 = document.getElementById('m2').value;
+      var tarifa = document.getElementById('tarifa').value;
+      var rol = document.getElementById('rol').value;
+      var surtido = document.getElementById('sur').value;
+      var cp = document.getElementById('cp').value;
+      var tiendas = document.getElementById('tiendas').value;
+      
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById('result').innerHTML = this.responseText;
+        }
+      };
+      //TODO: double check this, I think reques is not working
+      xhr.open("GET", "/tienda_espejo_CP?&m2=" + m2 + "&tarifa=" + tarifa + "&rol=" + rol + "&surtido=" + surtido + "&cp=" + cp + "&tiendas=" + tiendas, true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
+
