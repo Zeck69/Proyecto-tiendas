@@ -89,6 +89,13 @@ def tienda_espejo_CP(M2,TARIFA,ROL,SURTIDO,CP, tiendas):
     
     # for i in range(tiendas):
     #     print(shops.iloc[result[0][i]])
-    return shops[shops.index.isin(result[0])]
+    #idea: once the shops selected, do a reframe of just those with the actual word and return only then=> should work quite easy
+    answer = shops[shops.index.isin(result[0])]
+    # reframe the numbers in the columns to the actual words
+    answer['TARIFA'] = answer['TARIFA'].replace({1: 'AGRESIVA', 2: 'ESTANDAR', 3: 'PLUS', 4: 'XPLUS'})
+    answer['ROL'] = answer['ROL'].replace({1: 'CONVENIENCIA', 2: 'URB.COMERCIAL', 3: 'URB.RESIDENCIAL', 4: 'RURAL'})
+    answer['SURTIDO'] = answer['SURTIDO'].replace({1: 'NACIONAL3', 2: 'NACIONAL4', 3: 'NACIONAL5', 4: 'NACIONAL6', 5: 'NACIONAL7', 6: 'NACIONAL8'})
+    return answer
+    # return shops[shops.index.isin(result[0])]
 
 
