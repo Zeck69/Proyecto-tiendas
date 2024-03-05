@@ -85,7 +85,7 @@ def tienda_espejo_CP(M2,TARIFA,ROL,SURTIDO,CP, tiendas):
     X = scaler_raw.transform(X.reshape(1, -1))
     #find nearest neighbors
     nbrs = NearestNeighbors(n_neighbors=tiendas, algorithm='auto').fit(X_nn)
-    result = nbrs.kneighbors(X,2,return_distance=False)
+    result = nbrs.kneighbors(X,tiendas,return_distance=False)
     
     # for i in range(tiendas):
     #     print(shops.iloc[result[0][i]])
